@@ -1,0 +1,35 @@
+<% @page import="java.sql.*" %>
+<html>
+<head/>
+<body>
+<br>
+<h1 align=center>MEDICO</h1>
+<hr>
+<h3 align=right><a href=login.html>logout</a></h3>
+<br><br><br>
+<%
+String problem=request.getParameter("problem");
+try{
+Class.forName("oracle.jdbc.driver.OracleDriver");
+	  Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","afreen");
+Statement st=con.createStatement();
+ResultSet rs=st.executeQuery("SELECT m_name,cost FROM medicines WHERE description="+problem);
+rs.next();
+out.print("<h2>");
+ out.print("<table align=center cellspacing=10 cellpadding=10>")
+ out.print("<tr><td>Medicine Name : </td><td>"+rs.getString(1)+"</td></tr>"); 
+ out.print("<tr><td>Medicine Cost : </td><td>"+rs.getString(2)+"</td></tr>"); 
+out.print("<tr><td></td><td><input type=submit value=Buy></td></tr>");
+out.print("</table></h2>")
+st.close();
+con.close();
+}
+catch(SQLException | ClassNotFoundException a) 
+	{ 
+	   out.print("<h2>Enter valid Appointment ID</h2>");
+	}
+	out.close();
+%>
+
+</body>
+</html>

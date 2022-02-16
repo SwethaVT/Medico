@@ -1,0 +1,36 @@
+
+<html>
+<head>
+ <script type="text/javascript">
+  function validate(){
+  u=document.getElementById("UN").value
+  p=document.getElementById("PW").value
+if(u==null || u=="")
+{
+ alert("Please enter username")
+ return false
+}
+if(p==null || p=="")
+{
+ alert("Please enter password")
+ return false
+}
+</script>
+</head>
+<body>
+<br>
+<h1 align=center>MEDICO</h1>
+<hr><br><br><br><br>
+<form action=logincheck.jsp method=post onSubmit=return(validate())>
+<table align=center cellspacing=10 cellpadding=10>
+<tr><td>Username : </td>
+<td><input type=text name="UN"></td></tr>
+<tr><td>Password : </td>
+<td><input type=password name="PW"></td></tr>
+<tr><td></td><td><input type =submit value="login"></td></tr>
+</table>
+<h4 align=center>
+Click here to create account
+<a href="registration.html">Register</a></h4>
+</body>
+</html>

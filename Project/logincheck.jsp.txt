@@ -1,0 +1,55 @@
+<% @page import="java.sql.*" %>
+<%
+String un=request.getParameter("UN");
+String pw=request.getParameter("PW");
+
+try
+{
+Class.forName("oracle.jdbc.driver.OracleDriver");
+	  Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","afreen");
+Statement st=con.createStatement();
+ResultSet rs=st.executeQuery("SELECT password FROM registration WHERE reg_id="+un);
+rs.next();
+if(pw.equals(rs.getString(1)))
+{
+out.print("<html>");
+out.print("<head/>");
+out.print("<body>");
+out.print("<br><h1 align=center>MEDICO</h1><hr>");
+out.print("<h3 align=right><a href=login.html>logout</a></h3><br>");
+out.print("<h2 align=center>");
+out.print("Enter your Appointment ID/Test ID to get details of your Appointment/Test.....<br>");
+out.print("<form action="medico" method=post>");
+out.print("<input type=text size=45 name=apptid>");
+out.print("<input type=submit name=search>");
+out.print("</form></h2>");
+out.print("<table align=center cellspacing=10 cellpadding=10>");
+out.print("<tr><td align=center><a href=><h1>Book
+Appointment</h1></a></td></tr>");
+out.print("<tr><td align=center><a href=chat.jsp><h1>Chat with a Doctor</h1></a></td></tr>");
+out.print("<tr><td align=center><a href=medicine1.html><h1>Order Medicines</h1></a></td></tr>");
+out.print("<tr><td align=center><a href=><h1>Book Test & Scans</h1></a></td></tr>");
+out.print("</table>");
+out.print("</body>");
+out.print("</html>");
+}
+else
+{
+out.print("<html>");
+out.print("<head/>");
+out.print("<body>");
+out.print("<br><h1 align=center>MEDICO</h1><hr><br><br><br><br>");
+out.print("<h2 align=center>Invalid User ID or Password..!</h2>");
+out.print("<h3 align=center>Try again? <a href=login.html>Login Page</a></h3>");
+out.print("</body>");
+out.print("</html>");
+}
+st.close();
+con.close();
+}
+catch(SQLException | ClassNotFoundException a) 
+	{ 
+	   out.print("<h2>Enter valid Appointment ID</h2>");
+	}
+	out.close();
+%>
